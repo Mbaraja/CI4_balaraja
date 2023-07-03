@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Waktu pembuatan: 25 Jun 2023 pada 16.22
--- Versi server: 10.4.25-MariaDB
--- Versi PHP: 8.1.10
+-- Host: localhost:8889
+-- Generation Time: Jul 03, 2023 at 09:38 AM
+-- Server version: 5.7.34
+-- PHP Version: 8.0.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,13 +18,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `pwl_4219_1`
+-- Database: `pwl_4219`
 --
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `barang`
+-- Table structure for table `barang`
 --
 
 CREATE TABLE `barang` (
@@ -37,21 +37,19 @@ CREATE TABLE `barang` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `barang`
+-- Dumping data for table `barang`
 --
 
 INSERT INTO `barang` (`id`, `nama`, `harga`, `jumlah`, `keterangan`, `foto`) VALUES
 (1, 'Indomie Goreng', 2500, 50, 'Indomie Seleraku', 'indomie-mi-goreng-special_detail_094906814 (1).png'),
 (2, 'Sari Roti Kismis', 5000, 100, 'Roti Single', 'roti_tawar_raisin1.jpg'),
 (3, 'Susu Ultra', 5000, 100, 'Susu UHT', 'e31f03c4-8216-425d-8279-b7cee6e75cf8.jpg'),
-(4, 'Dji Sam Soe Refill', 20000, 24, 'Ududnya Orang NU', 'dji-sam-soe-234-premium-12-285587.jpg'),
-(8, 'Pak Danny', 999999, 3, 'Ganteng dan Keren', '1687244342_911e0adc9c50fe13f779.jpg'),
-(9, 'h21b4u1', 32132, 32, 'dqwd', '1687320411_af4af3c5699271e7a1c8.jpg');
+(4, 'Rokok', 25000, 12, 'rokok', '1688377059_329a55c2df4bc98d378d.jpg');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi`
+-- Table structure for table `transaksi`
 --
 
 CREATE TABLE `transaksi` (
@@ -66,17 +64,18 @@ CREATE TABLE `transaksi` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `transaksi`
+-- Dumping data for table `transaksi`
 --
 
 INSERT INTO `transaksi` (`id`, `username`, `total_harga`, `alamat`, `ongkir`, `status`, `created_by`, `created_date`) VALUES
-(1, 'regan', 19000, 'Jl. Imam Bonjol No.207, Pendrikan Kidul, Kec. Semarang Tengah, Kota Semarang, Jawa Tengah 50131', 9000, 0, 'regan', '2023-06-25 14:11:32'),
-(2, 'regan', 62500, 'Jl. Tembalang', 35000, 0, 'regan', '2023-06-25 14:13:34');
+(3, 'bara', 13500, 'pasarbanggi', 11000, 0, 'bara', '2023-06-26 10:27:54'),
+(4, 'barr', 24000, 'pasarbanggi', 19000, 0, 'barr', '2023-06-30 12:23:55'),
+(5, 'balaraja', 0, '', 0, 0, 'balaraja', '2023-07-01 15:10:13');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `transaksi_detail`
+-- Table structure for table `transaksi_detail`
 --
 
 CREATE TABLE `transaksi_detail` (
@@ -91,7 +90,7 @@ CREATE TABLE `transaksi_detail` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `transaksi_detail`
+-- Dumping data for table `transaksi_detail`
 --
 
 INSERT INTO `transaksi_detail` (`id`, `id_transaksi`, `id_barang`, `jumlah`, `diskon`, `subtotal_harga`, `created_by`, `created_date`) VALUES
@@ -99,84 +98,91 @@ INSERT INTO `transaksi_detail` (`id`, `id_transaksi`, `id_barang`, `jumlah`, `di
 (2, 1, 3, 1, 0, 5000, 'regan', '2023-06-25 14:11:32'),
 (3, 2, 4, 1, 0, 20000, 'regan', '2023-06-25 14:13:34'),
 (4, 2, 3, 1, 0, 5000, 'regan', '2023-06-25 14:13:34'),
-(5, 2, 1, 1, 0, 2500, 'regan', '2023-06-25 14:13:34');
+(5, 2, 1, 1, 0, 2500, 'regan', '2023-06-25 14:13:34'),
+(6, 3, 1, 1, 0, 2500, 'bara', '2023-06-26 10:27:54'),
+(7, 4, 1, 2, 0, 5000, 'barr', '2023-06-30 12:23:55'),
+(8, 5, 1, 1, 0, 2500, 'balaraja', '2023-07-01 15:10:13');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user`
+-- Table structure for table `user`
 --
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
   `username` varchar(50) NOT NULL,
   `role` varchar(25) NOT NULL,
-  `password` varchar(255) NOT NULL
+  `password` varchar(255) NOT NULL,
+  `is_aktif` tinyint(1) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user`
+-- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`id`, `username`, `role`, `password`) VALUES
-(1, 'regan', 'admin', '202cb962ac59075b964b07152d234b70'),
-(2, 'rcs', 'user', '202cb962ac59075b964b07152d234b70');
+INSERT INTO `user` (`id`, `username`, `role`, `password`, `is_aktif`) VALUES
+(1, 'bara', 'admin', '202cb962ac59075b964b07152d234b70', 0),
+(2, 'balaraja', 'user', '202cb962ac59075b964b07152d234b70', 1),
+(3, 'barr', 'user', '202cb962ac59075b964b07152d234b70', 0),
+(5, 'baraaaa', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 0),
+(6, 'noobmaster69', 'user', '575e22bc356137a41abdef379b776dba', 0);
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indeks untuk tabel `barang`
+-- Indexes for table `barang`
 --
 ALTER TABLE `barang`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transaksi`
+-- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `transaksi_detail`
+-- Indexes for table `transaksi_detail`
 --
 ALTER TABLE `transaksi_detail`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `user`
+-- Indexes for table `user`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `barang`
+-- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT untuk tabel `transaksi`
+-- AUTO_INCREMENT for table `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
--- AUTO_INCREMENT untuk tabel `transaksi_detail`
---
-ALTER TABLE `transaksi_detail`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `user`
+-- AUTO_INCREMENT for table `transaksi_detail`
+--
+ALTER TABLE `transaksi_detail`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

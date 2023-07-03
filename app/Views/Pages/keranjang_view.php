@@ -18,6 +18,7 @@ if (session()->getFlashData('success')) {
             <th scope="col">Nama</th>
             <th scope="col">Foto</th>
             <th scope="col">Harga</th>
+            <th scope="col">discount</th>
             <th scope="col">Jumlah</th>
             <th scope="col">Subtotal</th>
             <th scope="col">Aksi</th>

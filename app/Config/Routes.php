@@ -69,9 +69,7 @@ $routes->post('/user/update/(:any)', 'UserController::update/$1', ['filter' => '
 $routes->get('/user/delete/(:any)', 'UserController::delete/$1', ['filter' => 'auth']);
 $routes->get('/user/activate/(:any)', 'UserController::activate/$1', ['filter' => 'auth']);
 $routes->get('/user/deactivate/(:any)', 'UserController::deactivate/$1', ['filter' => 'auth']);
-
-
-
+$routes->get('/user/delete/(:any)', 'UserController::delete/$1', ['filter' => 'auth']);
 
 /*
  * --------------------------------------------------------------------

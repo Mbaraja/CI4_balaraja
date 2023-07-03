@@ -76,7 +76,6 @@
                 <th scope="row"><?php echo $index + 1 ?></th>
                 <td><?php echo $user['username'] ?></td>
                 <td><?php echo $user['role'] ?></td>
-                
                 <td>
                     <?php if ($user['is_aktif']) : ?>
                         <a href="<?= base_url('user/deactivate/' . $user['id']) ?>" class="btn btn-warning" onclick="return confirm('Nonaktifkan pengguna ini?')">
@@ -87,6 +86,9 @@
                             Aktifkan
                         </a>
                     <?php endif; ?>
+                    <a href="<?= base_url('user/edit/' . $user['id']) ?>" class="btn btn-primary" data-bs-toggle="akun" data-bs-target="#editAkun-<?= $user['id'] ?>">
+                        ubah
+                    </a>
                     <a href="<?= base_url('user/delete/' . $user['id']) ?>" class="btn btn-danger" onclick="return confirm('Hapus pengguna ini?')">
                         Hapus
                     </a>

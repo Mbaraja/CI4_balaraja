@@ -34,7 +34,7 @@ class UserController extends BaseController
         $data = $this->request->getPost();
         $validate = $this->validation->run($data, 'user');
         $errors = $this->validation->getErrors();
-
+        
         if (!$errors) {
             $dataForm = [
                 'name' => $this->request->getPost('name'),
@@ -89,13 +89,25 @@ class UserController extends BaseController
 
     public function edit($id)
     {
-        $data['user'] = $this->user->find($id);
+        $data = $this->request->getPost();
+        $validate = $this->validation->run($data, 'user');
+        $errors = $this->validation->getErrors();
 
-        if (!$data['user']) {
-            return redirect()->to('/user')->with('error', 'User not found.');
+        if (!$errors) {
+            $dataForm = [
+                'name' => $this->request->getPost('name'),
+                'email' => $this->request->getPost('email'),
+                'username' => $this->request->getPost('username'),
+                'password' => password_hash($this->request->getPost('password'), PASSWORD_DEFAULT),
+                'is_aktif' => $this->request->getPost('is_aktif') ? 1 : 0
+            ];
+
+            $this->produk->update($id, $dataForm);
+
+            return redirect('user')->with('success', 'Data Berhasil Diubah');
+        } else {
+            return redirect('user')->with('failed', implode("", $errors));
         }
-
-        return view('user/edit', $data);
     }
 
     public function update($id)
@@ -116,17 +128,33 @@ class UserController extends BaseController
 
     public function delete($id)
     {
-        $user = $this->user->find($id);
-
-        if (!$user) {
-            return redirect()->to('/user')->with('error', 'User not found.');
+        // Lakukan validasi ID pengguna
+        $validation = \Config\Services::validation();
+        $validation->setRules([
+            'id' => 'required|integer'
+        ]);
+    
+        if (!$validation->run(['id' => $id])) {
+            return redirect()->to('/user')->with('failed', 'ID pengguna tidak valid');
         }
-
-        // Proses penghapusan pengguna dari database
-        // ...
-
-        return redirect()->to('/user')->with('success', 'User deleted successfully.');
+    
+        // Cari pengguna dengan ID yang diberikan
+        $userModel = new \App\Models\UserModel();
+        $user = $userModel->find($id);
+    
+        if ($user) {
+            // Hapus pengguna dengan ID yang diberikan
+            $userModel->delete($id);
+    
+            // Redirect kembali ke halaman pengguna dengan pesan sukses
+            return redirect()->to('/user')->with('success', 'Pengguna berhasil dihapus');
+        } else {
+            // Redirect kembali ke halaman pengguna dengan pesan gagal
+            return redirect()->to('/user')->with('failed', 'Pengguna tidak ditemukan');
+        }
     }
+
+
 
     public function activate($id)
     {

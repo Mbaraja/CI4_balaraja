@@ -31,6 +31,8 @@ if (session()->getFlashData('failed')) {
             <th scope="col">Nama</th>
             <th scope="col">Harga</th>
             <th scope="col">Jumlah</th>
+            <th scope="col">Discount</th>
+            <th scope="col">Harga Diskon</th>
             <th scope="col">Foto</th>
             <th scope="col"></th>
         </tr>
@@ -42,6 +44,9 @@ if (session()->getFlashData('failed')) {
                 <td><?php echo $produk['nama'] ?></td>
                 <td><?php echo $produk['harga'] ?></td>
                 <td><?php echo $produk['jumlah'] ?></td>
+                <td><?php echo $produk['discount'] ?></td>
+                <td><?php echo $produk['harga'] - ($produk['harga'] * $produk['discount'] / 100); ?></td>
+
                 <td><img src="<?php echo base_url() . "public/img/" . $produk['foto'] ?>" width="100px"></td>
                 <td>
                     <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#editModal-<?= $produk['id'] ?>">
@@ -79,6 +84,14 @@ if (session()->getFlashData('failed')) {
                                     <label for="name">Keterangan</label>
                                     <input type="text" name="keterangan" class="form-control" id="keterangan" value="<?= $produk['keterangan'] ?>" placeholder="Keterangan Barang" required>
                                 </div>
+                                <div class="form-group">
+
+                                    <label for="discount">Discount (%)</label>
+                                    <input type="number" name="discount" id="discount" min="0" max="100">
+                                </div>
+
+
+
                                 <img src="<?php echo base_url() . "public/img/" . $produk['foto'] ?>" width="100px">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" id="check" name="check" value="1">
@@ -132,9 +145,15 @@ if (session()->getFlashData('failed')) {
                         <input type="text" name="keterangan" class="form-control" id="keterangan" placeholder="Keterangan Barang" required>
                     </div>
                     <div class="form-group">
+                        <label for="discount">Discount (%)</label>
+                        <input type="number" name="discount" id="discount" min="0" max="100">
+                    </div>
+
+                    <div class="form-group">
                         <label for="name">Foto</label>
                         <input type="file" class="form-control" id="foto" name="foto">
                     </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

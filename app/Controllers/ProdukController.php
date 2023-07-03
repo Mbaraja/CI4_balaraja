@@ -22,65 +22,68 @@ class ProdukController extends BaseController
     }
 
     public function create()
-    {
-        $data = $this->request->getPost();
-        $validate = $this->validation->run($data, 'barang');
-        $errors = $this->validation->getErrors();
+{
+    $data = $this->request->getPost();
+    $validate = $this->validation->run($data, 'barang');
+    $errors = $this->validation->getErrors();
 
-        if (!$errors) {
-            $dataForm = [
-                'nama' => $this->request->getPost('nama'),
-                'harga' => $this->request->getPost('harga'),
-                'jumlah' => $this->request->getPost('jumlah'),
-                'keterangan' => $this->request->getPost('keterangan')
-            ];
+    if (!$errors) {
+        // ...
 
-            $dataFoto = $this->request->getFile('foto');
+        $dataForm = [
+            'nama' => $this->request->getPost('nama'),
+            'harga' => $this->request->getPost('harga'),
+            'jumlah' => $this->request->getPost('jumlah'),
+            'keterangan' => $this->request->getPost('keterangan'),
+            'diskon' => $this->request->getPost('diskon')
+        ];
 
-            if ($dataFoto->isValid()) {
-                $fileName = $dataFoto->getRandomName();
-                $dataFoto->move('public/img/', $fileName);
-                $dataForm['foto'] = $fileName;
-            }
+        // ...
+        $this->produk->insert($dataForm);
+    $produkId = $this->produk->getInsertID(); // Get the inserted product's ID
 
-            $this->produk->insert($dataForm);
+    // Save the discount amount in the database
+    $transaksiDetailData = [
+        'produk_id' => $produkId,
+        'diskon' => $this->request->getPost('diskon')
+    ];
+    // Insert the transaksi_detail data into the database
 
-            return redirect('produk')->with('success', 'Data Berhasil Ditambah');
-        } else {
-            return redirect('produk')->with('failed', implode("<br>", $errors));
-        }
+    // ...
+
+        $this->produk->insert($dataForm);
+
+        return redirect('produk')->with('success', 'Data Berhasil Ditambah');
+    } else {
     }
+}
 
-    public function edit($id)
-    {
-        $data = $this->request->getPost();
-        $validate = $this->validation->run($data, 'barang');
-        $errors = $this->validation->getErrors();
+public function edit($id)
+{
+    $data = $this->request->getPost();
+    $validate = $this->validation->run($data, 'barang');
+    $errors = $this->validation->getErrors();
 
-        if (!$errors) {
-            $dataForm = [
-                'nama' => $this->request->getPost('nama'),
-                'harga' => $this->request->getPost('harga'),
-                'jumlah' => $this->request->getPost('jumlah'),
-                'keterangan' => $this->request->getPost('keterangan')
-            ];
+    if (!$errors) {
+        // ...
 
-            if ($this->request->getPost('check')) {
-                $dataFoto = $this->request->getFile('foto');
-                if ($dataFoto->isValid()) {
-                    $fileName = $dataFoto->getRandomName();
-                    $dataFoto->move('public/img/', $fileName);
-                    $dataForm['foto'] = $fileName;
-                }
-            }
+        $dataForm = [
+            'nama' => $this->request->getPost('nama'),
+            'harga' => $this->request->getPost('harga'),
+            'jumlah' => $this->request->getPost('jumlah'),
+            'keterangan' => $this->request->getPost('keterangan'),
+            'diskon' => $this->request->getPost('diskon')
+        ];
 
-            $this->produk->update($id, $dataForm);
+        // ...
 
-            return redirect('produk')->with('success', 'Data Berhasil Diubah');
-        } else {
-            return redirect('produk')->with('failed', implode("", $errors));
-        }
+        $this->produk->update($id, $dataForm);
+
+        return redirect('produk')->with('success', 'Data Berhasil Diubah');
+    } else {
+        // ...
     }
+}
 
     public function delete($id)
     {

@@ -1,0 +1,1 @@
+__ci_last_regenerate|i:1688378561;_ci_previous_url|s:46:"http://localhost:8888/CI4njajal/index.php/user";username|s:4:"bara";role|s:5:"admin";isLoggedIn|b:1;failed|s:156:"The nama field is required.The email field is required.The username field is required.The password field is required.The is_aktif field must be one of: 0,1.";__ci_vars|a:1:{s:6:"failed";s:3:"old";}
