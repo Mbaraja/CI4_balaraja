@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Generation Time: Jul 03, 2023 at 09:38 AM
+-- Generation Time: Jul 07, 2023 at 09:40 AM
 -- Server version: 5.7.34
 -- PHP Version: 8.0.8
 
@@ -31,6 +31,7 @@ CREATE TABLE `barang` (
   `id` int(11) UNSIGNED NOT NULL,
   `nama` varchar(50) DEFAULT NULL,
   `harga` float DEFAULT NULL,
+  `discount` int(255) NOT NULL,
   `jumlah` int(11) DEFAULT NULL,
   `keterangan` varchar(100) DEFAULT NULL,
   `foto` varchar(225) DEFAULT NULL
@@ -40,11 +41,11 @@ CREATE TABLE `barang` (
 -- Dumping data for table `barang`
 --
 
-INSERT INTO `barang` (`id`, `nama`, `harga`, `jumlah`, `keterangan`, `foto`) VALUES
-(1, 'Indomie Goreng', 2500, 50, 'Indomie Seleraku', 'indomie-mi-goreng-special_detail_094906814 (1).png'),
-(2, 'Sari Roti Kismis', 5000, 100, 'Roti Single', 'roti_tawar_raisin1.jpg'),
-(3, 'Susu Ultra', 5000, 100, 'Susu UHT', 'e31f03c4-8216-425d-8279-b7cee6e75cf8.jpg'),
-(4, 'Rokok', 25000, 12, 'rokok', '1688377059_329a55c2df4bc98d378d.jpg');
+INSERT INTO `barang` (`id`, `nama`, `harga`, `discount`, `jumlah`, `keterangan`, `foto`) VALUES
+(1, 'Indomie Goreng', 2500, 3, 50, 'Indomie Seleraku', 'indomie-mi-goreng-special_detail_094906814 (1).png'),
+(2, 'Sari Roti Kismis', 5000, 3, 100, 'Roti Single', 'roti_tawar_raisin1.jpg'),
+(3, 'Susu Ultra', 5000, 3, 100, 'Susu UHT', 'e31f03c4-8216-425d-8279-b7cee6e75cf8.jpg'),
+(4, 'Rokok', 25000, 3, 12, 'rokok', '1688377059_329a55c2df4bc98d378d.jpg');
 
 -- --------------------------------------------------------
 
@@ -123,8 +124,7 @@ CREATE TABLE `user` (
 
 INSERT INTO `user` (`id`, `username`, `role`, `password`, `is_aktif`) VALUES
 (1, 'bara', 'admin', '202cb962ac59075b964b07152d234b70', 0),
-(2, 'balaraja', 'user', '202cb962ac59075b964b07152d234b70', 1),
-(3, 'barr', 'user', '202cb962ac59075b964b07152d234b70', 0),
+(2, 'balaraja', 'user', '202cb962ac59075b964b07152d234b70', 0),
 (5, 'baraaaa', 'admin', '827ccb0eea8a706c4c34a16891f84e7b', 0),
 (6, 'noobmaster69', 'user', '575e22bc356137a41abdef379b776dba', 0);
 
