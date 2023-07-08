@@ -58,3 +58,29 @@ Additionally, make sure that the following extensions are enabled in your PHP:
 - Nama   : M Baraja Rahardiansyah
 - NIM    : A11.2022.14716
 - Kelp   : A11.4219
+
+screenshot :
+
+-LOGIN DAN REGISTER :
+
+1. LOGIN
+<img width="1440" alt="Screen Shot 2023-07-08 at 08 20 43" src="https://github.com/Mbaraja/CI4_balaraja/assets/112961954/f09943cd-eb94-4438-a495-add24b1e15dd">
+
+2. REGISTER
+<img width="1440" alt="register" src="https://github.com/Mbaraja/CI4_balaraja/assets/112961954/3381d3f5-08d8-49b8-a9e6-661802e1f6cc">
+
+BERANDA :
+
+1. HOME
+<img width="1440" alt="home" src="https://github.com/Mbaraja/CI4_balaraja/assets/112961954/6a5b7d2f-7020-45ae-bd41-ae2ffe41ab06">
+
+2. KERANJANG
+<img width="1440" alt="keranjang" src="https://github.com/Mbaraja/CI4_balaraja/assets/112961954/268663af-db03-48a7-814a-dfa2f7b0f851">
+
+3. PRODUK 
+<img width="1440" alt="produk" src="https://github.com/Mbaraja/CI4_balaraja/assets/112961954/d5ec097a-a61e-4219-9d3d-ccad9fc907d8">
+
+4. MANAJEMEN PENGGUNA
+<img width="1440" alt="manajemen pengguna" src="https://github.com/Mbaraja/CI4_balaraja/assets/112961954/709041a3-ed19-4d88-987f-921520e4ec77">
+
+
